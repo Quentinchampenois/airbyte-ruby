@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe AirbyteRuby::Resources::Source do
   subject { described_class.new(adapter, args) }
 

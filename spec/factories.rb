@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :postgres_adapter, class: AirbyteRuby::Adapters::Postgres do
     host { "localhost" }

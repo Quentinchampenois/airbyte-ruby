@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 module AirbyteRuby
   module Adapters
     class Postgres
       SOURCE_TYPE = :postgres
-      attr_accessor :source_type, :host, :port, :database, :username, :password, :ssl_mode, :replication_method, :tunnel_method
+      attr_accessor :source_type, :host, :port, :database, :username, :password, :ssl_mode, :replication_method,
+                    :tunnel_method
 
-      def initialize(args={})
+      def initialize(args = {})
         @source_type = SOURCE_TYPE.to_s
         @host = args[:host]
         @port = args[:port]

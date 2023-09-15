@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe AirbyteRuby::Adapters::Postgres do
   subject { described_class.new(args) }
 

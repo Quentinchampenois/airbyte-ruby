@@ -2,8 +2,8 @@
 
 require "airbyte_ruby"
 require "byebug"
-require 'vcr'
-require 'webmock/rspec'
+require "vcr"
+require "webmock/rspec"
 require "factory_bot"
 require "factories"
 
@@ -19,7 +19,6 @@ RSpec.configure do |config|
   config.example_status_persistence_file_path = ".rspec_status"
 
   config.include FactoryBot::Syntax::Methods
-
 
   # Disable RSpec exposing methods globally on `Module` and `main`
   config.disable_monkey_patching!
