@@ -19,3 +19,4 @@ group :test do
   gem "vcr", "~> 6.0"
   gem "webmock", "~> 3.0"
 end
+gem "factory_bot", "~> 6.3"

@@ -79,4 +79,19 @@ RSpec.describe AirbyteRuby::Adapters::Postgres do
       expect(subject).to be_a(AirbyteRuby::Adapters::Postgres)
     end
   end
+
+  describe "#configuration" do
+    it "returns a hash with the correct attributes" do
+      configuration = subject.configuration
+      expect(configuration).to be_a Hash
+      expect(configuration).to include(host: "localhost")
+      expect(configuration).to include(port: 5432)
+      expect(configuration).to include(database: "airbyte")
+      expect(configuration).to include(username: "airbyte")
+      expect(configuration).to include(password: "airbyte")
+      expect(configuration).to include(ssl_mode: { mode: "prefer" })
+      expect(configuration).to include(replication_method: { method: "Xmin" })
+      expect(configuration).to include(tunnel_method: { tunnel_method: "NO_TUNNEL" })
+    end
+  end
 end

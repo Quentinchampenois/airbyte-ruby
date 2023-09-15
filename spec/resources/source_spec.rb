@@ -1,34 +1,16 @@
 RSpec.describe AirbyteRuby::Resources::Source do
-  subject { described_class.new(args) }
+  subject { described_class.new(adapter, args) }
 
   let(:name) { "Airbyte source" }
   let(:source_type) { "postgres" }
   let(:workspace_id) { "123456789" }
-  let(:connection_configuration) do
-    {
-      "host": "localhost",
-      "port": 5432,
-      "database": "airbyte",
-      "username": "airbyte",
-      "password": "airbyte",
-      "ssl_mode": {
-        "mode": "prefer"
-      },
-      "replication_method": {
-        "method": "Xmin"
-      },
-      "tunnel_method": {
-        "tunnel_method": "NO_TUNNEL"
-      }
-    }
-  end
+  let(:adapter) { build(:postgres_adapter) }
 
   let(:args) do
     {
       name: name,
       source_type: source_type,
-      workspace_id: workspace_id,
-      connection_configuration: connection_configuration
+      workspace_id: workspace_id
     }
   end
 

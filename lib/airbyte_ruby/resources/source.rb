@@ -3,12 +3,12 @@ module AirbyteRuby
     class Source
       attr_reader :source_id, :name, :source_type, :workspace_id, :connection_configuration
 
-      def initialize(args={})
+      def initialize(adapter, args={})
         @source_id = args[:source_id]
         @name = args[:name]
         @source_type = args[:source_type]
         @workspace_id = args[:workspace_id]
-        @connection_configuration = args[:connection_configuration]
+        @connection_configuration = adapter.configuration
       end
 
       def list
