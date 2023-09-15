@@ -49,10 +49,14 @@ RSpec.describe AirbyteRuby::Resources::Source do
     expect(subject.connection_configuration).to include(tunnel_method: { tunnel_method: "NO_TUNNEL" })
   end
 
-  describe "#list" do
+  describe "#list_all" do
+    it "responds to method list_all" do
+      expect(subject).to respond_to(:list_all)
+    end
+
     it "returns a list of sources" do
       VCR.use_cassette("resources/source/list") do
-        response = subject.list
+        response = subject.list_all
         expect(response).to be_a(Array)
         expect(response.first).to be_a(Hash)
       end
