@@ -12,12 +12,12 @@ module AirbyteRuby
       end
 
       def list
-        conn = ::Faraday.new(url: 'http://localhost:8006/v1') do |faraday|
+        conn = ::Faraday.new(url: 'http://localhost:8006/') do |faraday|
           faraday.set_basic_auth('airbyte', 'password')
         end
-        response = conn.get('/sources?includeDeleted=false&limit=20&offset=0')
+        res = conn.get('/v1/sources?includeDeleted=false&limit=20&offset=0')
+        JSON.parse(res.body)["data"]
 
-        JSON.parse(response.body)["data"]
       end
     end
   end
