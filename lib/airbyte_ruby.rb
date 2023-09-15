@@ -2,7 +2,8 @@
 
 require "faraday"
 require_relative "airbyte_ruby/version"
-require_relative 'airbyte_ruby/resources/source'
+require_relative "airbyte_ruby/resources/source"
+require_relative "airbyte_ruby/adapters/postgres"
 
 module AirbyteRuby
   class Error < StandardError; end
