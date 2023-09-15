@@ -1,0 +1,19 @@
+module AirbyteRuby
+  module Resources
+    class Source
+      @source_id: String
+      @name: String
+      @source_type: String
+      @workspace_id: String
+      @connection_configuration: Hash[String, String]
+
+      attr_reader source_id: String
+      attr_reader name: String
+      attr_reader source_type: String
+      attr_reader workspace_id: String
+      attr_reader connection_configuration: Hash[String, String]
+
+
+    end
+  end
+end

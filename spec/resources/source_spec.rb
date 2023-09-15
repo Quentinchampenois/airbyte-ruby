@@ -4,9 +4,32 @@ RSpec.describe AirbyteRuby::Resources::Source do
   let(:name) { "Airbyte source" }
   let(:source_type) { "postgres" }
   let(:workspace_id) { "123456789" }
-  let(:connection_configuration) { { "host": "localhost", "port": 5432, "database": "airbyte", "username": "airbyte", "password": "airbyte" } }
+  let(:connection_configuration) do
+    {
+      "host": "localhost",
+      "port": 5432,
+      "database": "airbyte",
+      "username": "airbyte",
+      "password": "airbyte",
+      "ssl_mode": {
+        "mode": "prefer"
+      },
+      "replication_method": {
+        "method": "Xmin"
+      },
+      "tunnel_method": {
+        "tunnel_method": "NO_TUNNEL"
+      }
+    }
+  end
+
   let(:args) do
-    { name: name, source_type: source_type, workspace_id: workspace_id, connection_configuration: connection_configuration }
+    {
+      name: name,
+      source_type: source_type,
+      workspace_id: workspace_id,
+      connection_configuration: connection_configuration
+    }
   end
 
   it "creates a new instance of Source" do
@@ -16,6 +39,30 @@ RSpec.describe AirbyteRuby::Resources::Source do
   it "has a name attribute" do
     expect(subject).to respond_to(:name)
     expect(subject.name).to eq("Airbyte source")
+  end
+
+  it "has a source_type attribute" do
+    expect(subject).to respond_to(:source_type)
+    expect(subject.source_type).to eq("postgres")
+  end
+
+  it "has a workspace_id attribute" do
+    expect(subject).to respond_to(:workspace_id)
+    expect(subject.workspace_id).to eq("123456789")
+  end
+
+  it "has a connection_configuration attribute" do
+    expect(subject).to respond_to(:connection_configuration)
+    expect(subject.connection_configuration).to be_a Hash
+
+    expect(subject.connection_configuration).to include(host: "localhost")
+    expect(subject.connection_configuration).to include(port: 5432)
+    expect(subject.connection_configuration).to include(database: "airbyte")
+    expect(subject.connection_configuration).to include(username: "airbyte")
+    expect(subject.connection_configuration).to include(password: "airbyte")
+    expect(subject.connection_configuration).to include(ssl_mode: { mode: "prefer" })
+    expect(subject.connection_configuration).to include(replication_method: { method: "Xmin" })
+    expect(subject.connection_configuration).to include(tunnel_method: { tunnel_method: "NO_TUNNEL" })
   end
 
   describe "#list" do

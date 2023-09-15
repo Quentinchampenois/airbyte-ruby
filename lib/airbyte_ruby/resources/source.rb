@@ -2,6 +2,7 @@ module AirbyteRuby
   module Resources
     class Source
       attr_reader :source_id, :name, :source_type, :workspace_id, :connection_configuration
+
       def initialize(args={})
         @source_id = args[:source_id]
         @name = args[:name]
