@@ -4,13 +4,15 @@ RSpec.describe AirbyteRuby::Resources::Source do
   subject { described_class.new(adapter, args) }
 
   let(:name) { "Airbyte source" }
+  let(:source_id) { "9afc4250-e463-4439-80bd-c9b41b215839" }
   let(:source_type) { "postgres" }
-  let(:workspace_id) { "123456789" }
+  let(:workspace_id) { "9af17e85-925f-4af3-b06e-55597ac7aff1" }
   let(:adapter) { build(:postgres_adapter) }
 
   let(:args) do
     {
       name: name,
+      source_id: source_id,
       source_type: source_type,
       workspace_id: workspace_id
     }
@@ -32,13 +34,14 @@ RSpec.describe AirbyteRuby::Resources::Source do
 
   it "has a workspace_id attribute" do
     expect(subject).to respond_to(:workspace_id)
-    expect(subject.workspace_id).to eq("123456789")
+    expect(subject.workspace_id).to eq("9af17e85-925f-4af3-b06e-55597ac7aff1")
   end
 
   it "has a connection_configuration attribute" do
     expect(subject).to respond_to(:connection_configuration)
     expect(subject.connection_configuration).to be_a Hash
 
+    expect(subject.connection_configuration).to include(sourceType: "postgres")
     expect(subject.connection_configuration).to include(host: "localhost")
     expect(subject.connection_configuration).to include(port: 5432)
     expect(subject.connection_configuration).to include(database: "airbyte")
@@ -59,6 +62,26 @@ RSpec.describe AirbyteRuby::Resources::Source do
         response = subject.list_all
         expect(response).to be_a(Array)
         expect(response.first).to be_a(Hash)
+      end
+    end
+  end
+
+  describe "#create" do
+    it "responds to method create" do
+      expect(subject).to respond_to(:create)
+    end
+
+    it "creates a new source" do
+      VCR.use_cassette("resources/source/create") do
+        response = subject.create
+
+        expect(response).to be_a(Hash)
+        expect(response).to include("sourceId")
+        expect(response).to include("name")
+        expect(response).to include("sourceType")
+        expect(response).to include("workspaceId")
+        expect(response).to include("configuration")
+        expect(response["configuration"]).to be_a(Hash)
       end
     end
   end

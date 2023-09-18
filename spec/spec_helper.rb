@@ -13,6 +13,7 @@ VCR.configure do |config|
 end
 
 WebMock.enable!
+WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -25,14 +26,5 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
-  end
-
-  config.before(:each) do
-    WebMock.allow_net_connect!(allow_localhost: false)
-  end
-
-  # Disable WebMock after the tests are done.
-  config.after(:each) do
-    WebMock.disable_net_connect!(allow_localhost: false)
   end
 end

@@ -4,6 +4,7 @@ module AirbyteRuby
   module Adapters
     class Postgres
       SOURCE_TYPE = :postgres
+
       attr_accessor :source_type, :host, :port, :database, :username, :password, :ssl_mode, :replication_method,
                     :tunnel_method
 
@@ -21,6 +22,7 @@ module AirbyteRuby
 
       def configuration
         {
+          sourceType: @source_type,
           host: @host,
           port: @port,
           database: @database,
