@@ -2,6 +2,7 @@
 
 module AirbyteRuby
   module Resources
+    # Resource class for Airbyte Sources
     class Source < Base
       ENDPOINTS = OpenStruct.new(
         list: "/v1/sources?includeDeleted=false&limit=20&offset=0",
@@ -13,6 +14,8 @@ module AirbyteRuby
 
       attr_reader :source_id, :name, :source_type, :workspace_id, :connection_configuration
 
+      # TODO: Include Base module once ready
+      # rubocop:disable Lint/MissingSuper
       def initialize(adapter, args = {})
         @source_id = args[:source_id]
         @name = args[:name]
@@ -20,6 +23,7 @@ module AirbyteRuby
         @connection_configuration = adapter.configuration
         @source_type = adapter.source_type
       end
+      # rubocop:enable Lint/MissingSuper
 
       def to_json(*_args)
         {
@@ -29,7 +33,7 @@ module AirbyteRuby
         }.to_json
       end
 
-      def get_all
+      def fetch_all
         list(ENDPOINTS.list)
       end
 

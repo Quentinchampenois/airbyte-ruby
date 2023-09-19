@@ -9,9 +9,9 @@ RSpec.describe AirbyteRuby::Resources::Base do
     end
   end
 
-  describe "#get_all" do
+  describe "#fetch_all" do
     it "raises an NotImplementedError" do
-      expect { subject.get_all }.to raise_error(NotImplementedError)
+      expect { subject.fetch_all }.to raise_error(NotImplementedError)
     end
   end
 

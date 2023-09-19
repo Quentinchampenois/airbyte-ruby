@@ -2,6 +2,8 @@
 
 module AirbyteRuby
   module Resources
+    # Base class for Airbyte Resources
+    # TODO: Move to module rather than class
     class Base
       include AirbyteRuby::Requests
 
@@ -9,7 +11,7 @@ module AirbyteRuby
         raise NotImplementedError
       end
 
-      def get_all
+      def fetch_all
         raise NotImplementedError
       end
 

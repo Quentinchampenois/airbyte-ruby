@@ -2,6 +2,7 @@
 
 module AirbyteRuby
   module Adapters
+    # Postgres source_type adapter for AirbyteRuby source resources
     class Postgres
       SOURCE_TYPE = :postgres
 

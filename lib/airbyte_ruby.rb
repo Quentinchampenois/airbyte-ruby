@@ -8,6 +8,7 @@ require_relative "airbyte_ruby/resources/base"
 require_relative "airbyte_ruby/resources/source"
 require_relative "airbyte_ruby/adapters/postgres"
 
+# AirbyteRuby is a Ruby library for the Airbyte API.
 module AirbyteRuby
   class Error < StandardError; end
 

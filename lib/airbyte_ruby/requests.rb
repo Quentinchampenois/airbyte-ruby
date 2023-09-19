@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module AirbyteRuby
+  # Requests module for AirbyteRuby
   module Requests
     ENDPOINT = "http://localhost:8006/"
     BASIC_AUTH_CREDENTIALS = OpenStruct.new(username: "airbyte", password: "password")
