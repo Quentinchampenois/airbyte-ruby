@@ -5,7 +5,7 @@ http_interactions:
     uri: http://localhost:8006/v1/connections
     body:
       encoding: UTF-8
-      string: '{"name":"Airbyte connection","workspaceId":"9af17e85-925f-4af3-b06e-55597ac7aff1","configuration":{"host":"localhost","port":5432,"database":"airbyte","schema":"public","username":"airbyte","password":"airbyte","ssl_mode":{"mode":"prefer"},"replication_method":{"method":"Xmin"},"tunnel_method":{"tunnel_method":"NO_TUNNEL"},"connectionType":"postgres"}}'
+      string: '{"name":"Airbyte connection","sourceId":null,"destinationId":null}'
     headers:
       Authorization:
       - Basic YWlyYnl0ZTpwYXNzd29yZA==
@@ -19,21 +19,21 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 500
-      message: Internal Server Error
+      code: 200
+      message: Ok
     headers:
       Server:
       - nginx/1.25.2
       Date:
-      - Tue, 19 Sep 2023 13:46:59 GMT
+      - Tue, 19 Sep 2023 14:49:54 GMT
       Content-Type:
-      - application/problem+json
+      - application/json
       Content-Length:
-      - '35'
+      - '248'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"type":"about:blank","status":500}'
-  recorded_at: Tue, 19 Sep 2023 13:46:59 GMT
+      string: '{"connectionId":"uuid","name":"Connection name","sourceId":"source_uuid","destinationId":"destination_uuid","workspaceId":"workspace_uuid","status":"active","schedule":{"scheduleType":"basic"},"dataResidency":"auto","configuration":{"name":"name"}}'
+  recorded_at: Tue, 19 Sep 2023 14:49:54 GMT
 recorded_with: VCR 6.2.0

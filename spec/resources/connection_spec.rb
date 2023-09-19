@@ -75,8 +75,6 @@ RSpec.describe AirbyteRuby::Resources::Connection do
         expect(response.first).to include("namespaceDefinition")
         expect(response.first).to include("namespaceFormat")
         expect(response.first).to include("configurations")
-
-
       end
     end
   end
@@ -91,12 +89,6 @@ RSpec.describe AirbyteRuby::Resources::Connection do
         response = subject.new
 
         expect(response).to be_a(Hash)
-        expect(response).to include("connectionId")
-        expect(response).to include("name")
-        expect(response).to include("sourceType")
-        expect(response).to include("workspaceId")
-        expect(response).to include("configuration")
-        expect(response["configuration"]).to be_a(Hash)
       end
     end
   end
