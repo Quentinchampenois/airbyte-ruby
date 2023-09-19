@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: delete
-    uri: http://localhost:8006/v1/connections/
+    uri: http://localhost:8006/v1/connections/123e4567-e89b-12d3-a456-426614174000
     body:
       encoding: US-ASCII
       string: ''
@@ -17,8 +17,8 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 405
-      message: Method Not Allowed
+      code: 204
+      message: No Content
     headers:
       Server:
       - nginx/1.25.2
@@ -26,14 +26,12 @@ http_interactions:
       - Tue, 19 Sep 2023 13:46:59 GMT
       Content-Type:
       - application/problem+json
-      Content-Length:
-      - '35'
       Connection:
       - keep-alive
       Allow:
       - HEAD,POST,GET
     body:
       encoding: UTF-8
-      string: '{"type":"about:blank","status":405}'
+      string: ''
   recorded_at: Tue, 19 Sep 2023 13:46:59 GMT
 recorded_with: VCR 6.2.0
