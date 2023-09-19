@@ -12,18 +12,16 @@ module AirbyteRuby
         delete: "/v1/connections/:connection_id"
       )
 
-      attr_reader :id, :name, :type, :workspace_id, :connection_configuration
+      attr_reader :id, :name, :source_id, :destination_id, :workspace_id
 
       # TODO: Include Base module once ready
       # rubocop:disable Lint/MissingSuper
-      def initialize(adapter, args = {})
+      def initialize(args = {})
         @id = args[:id]
         @name = args[:name]
         @workspace_id = args[:workspace_id]
         @source_id = args[:source_id]
         @destination_id = args[:destination_id]
-        @connection_configuration = adapter.configuration
-        @type = adapter.type
       end
       # rubocop:enable Lint/MissingSuper
 

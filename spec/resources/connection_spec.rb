@@ -1,17 +1,20 @@
 # frozen_string_literal: true
 
 RSpec.describe AirbyteRuby::Resources::Connection do
-  subject { described_class.new(adapter, args) }
+  subject { described_class.new(args) }
 
   let(:name) { "Airbyte connection" }
   let(:id) { "123e4567-e89b-12d3-a456-426614174000" }
+  let(:source_id) { "123e4567-e89b-12d3-a456-426614174000" }
+  let(:destination_id) { "123e4567-e89b-12d3-a456-426614174000" }
   let(:workspace_id) { "9af17e85-925f-4af3-b06e-55597ac7aff1" }
-  let(:adapter) { build(:postgres_adapter) }
 
   let(:args) do
     {
       name: name,
       id: id,
+      source_id: source_id,
+      destination_id: destination_id,
       workspace_id: workspace_id
     }
   end
@@ -29,28 +32,26 @@ RSpec.describe AirbyteRuby::Resources::Connection do
     expect(subject.name).to eq("Airbyte connection")
   end
 
-  it "has a type attribute" do
-    expect(subject).to respond_to(:type)
-    expect(subject.type).to eq("postgres")
-  end
-
   it "has a workspace_id attribute" do
     expect(subject).to respond_to(:workspace_id)
     expect(subject.workspace_id).to eq("9af17e85-925f-4af3-b06e-55597ac7aff1")
   end
 
-  it "has a connection_configuration attribute" do
-    expect(subject).to respond_to(:connection_configuration)
-    expect(subject.connection_configuration).to be_a Hash
+  describe "#to_json" do
+    it "responds to method to_json" do
+      expect(subject).to respond_to(:to_json)
+    end
 
-    expect(subject.connection_configuration).to include(host: "localhost")
-    expect(subject.connection_configuration).to include(port: 5432)
-    expect(subject.connection_configuration).to include(database: "airbyte")
-    expect(subject.connection_configuration).to include(username: "airbyte")
-    expect(subject.connection_configuration).to include(password: "airbyte")
-    expect(subject.connection_configuration).to include(ssl_mode: { mode: "prefer" })
-    expect(subject.connection_configuration).to include(replication_method: { method: "Xmin" })
-    expect(subject.connection_configuration).to include(tunnel_method: { tunnel_method: "NO_TUNNEL" })
+    it "returns a json string" do
+      expect(subject.to_json).to be_a(String)
+      expect(subject.to_json).to eq(
+        {
+          name: "Airbyte connection",
+          sourceId: "123e4567-e89b-12d3-a456-426614174000",
+          destinationId: "123e4567-e89b-12d3-a456-426614174000"
+        }.to_json
+      )
+    end
   end
 
   describe "#fetch_all" do
