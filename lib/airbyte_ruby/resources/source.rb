@@ -4,6 +4,7 @@ module AirbyteRuby
   module Resources
     class Source
       include AirbyteRuby::Requests
+
       ENDPOINTS = OpenStruct.new(
         list: "/v1/sources?includeDeleted=false&limit=20&offset=0",
         create: "/v1/sources"
@@ -25,6 +26,14 @@ module AirbyteRuby
           workspaceId: @workspace_id,
           configuration: @connection_configuration
         }.to_json
+      end
+
+      def get_all
+        list(ENDPOINTS.list)
+      end
+
+      def new
+        create(ENDPOINTS.create)
       end
     end
   end

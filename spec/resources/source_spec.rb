@@ -52,28 +52,28 @@ RSpec.describe AirbyteRuby::Resources::Source do
     expect(subject.connection_configuration).to include(tunnel_method: { tunnel_method: "NO_TUNNEL" })
   end
 
-  describe "#list_all" do
-    it "responds to method list_all" do
-      expect(subject).to respond_to(:list_all)
+  describe "#get_all" do
+    it "responds to method get_all" do
+      expect(subject).to respond_to(:get_all)
     end
 
     it "returns a list of sources" do
-      VCR.use_cassette("resources/source/list") do
-        response = subject.list_all
+      VCR.use_cassette("resources/source/get_all") do
+        response = subject.get_all
         expect(response).to be_a(Array)
         expect(response.first).to be_a(Hash)
       end
     end
   end
 
-  describe "#create" do
-    it "responds to method create" do
-      expect(subject).to respond_to(:create)
+  describe "#new" do
+    it "responds to method new" do
+      expect(subject).to respond_to(:new)
     end
 
     it "creates a new source" do
-      VCR.use_cassette("resources/source/create") do
-        response = subject.create
+      VCR.use_cassette("resources/source/new") do
+        response = subject.new
 
         expect(response).to be_a(Hash)
         expect(response).to include("sourceId")
