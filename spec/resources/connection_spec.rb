@@ -4,7 +4,7 @@ RSpec.describe AirbyteRuby::Resources::Connection do
   subject { described_class.new(adapter, args) }
 
   let(:name) { "Airbyte connection" }
-  let(:id) { "" }
+  let(:id) { "123e4567-e89b-12d3-a456-426614174000" }
   let(:workspace_id) { "9af17e85-925f-4af3-b06e-55597ac7aff1" }
   let(:adapter) { build(:postgres_adapter) }
 
@@ -103,12 +103,15 @@ RSpec.describe AirbyteRuby::Resources::Connection do
         response = subject.fetch
 
         expect(response).to be_a(Hash)
-        expect(response).to include("connectionId")
-        expect(response).to include("name")
-        expect(response).to include("connectionType")
         expect(response).to include("workspaceId")
-        expect(response).to include("configuration")
-        expect(response["configuration"]).to be_a(Hash)
+        expect(response).to include("sourceId")
+        expect(response).to include("destinationId")
+        expect(response).to include("name")
+        expect(response).to include("status")
+        expect(response).to include("schedule")
+        expect(response).to include("dataResidency")
+        expect(response).to include("configurations")
+        expect(response["configurations"]).to be_a(Hash)
       end
     end
   end
