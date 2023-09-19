@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: patch
-    uri: http://localhost:8006/v1/connections/a995c161-42c6-47a7-971b-12366d90bfc5
+    uri: http://localhost:8006/v1/connections/123456789-42c6-47a7-971b-12366d90bfc5
     body:
       encoding: UTF-8
       string: '{"name":"Updated name","workspaceId":"9af17e85-925f-4af3-b06e-55597ac7aff1","configuration":{"host":"localhost","port":5432,"database":"airbyte","schema":"public","username":"airbyte","password":"airbyte","ssl_mode":{"mode":"prefer"},"replication_method":{"method":"Xmin"},"tunnel_method":{"tunnel_method":"NO_TUNNEL"},"connectionType":"postgres"}}'
@@ -19,8 +19,8 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 400
-      message: Bad Request
+      code: 200
+      message: Ok
     headers:
       Server:
       - nginx/1.25.2
@@ -29,12 +29,11 @@ http_interactions:
       Content-Type:
       - application/problem+json
       Content-Length:
-      - '197'
+      - '372'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"type":"https://reference.airbyte.com/reference/errors#resource-not-found","title":"resource-not-found","status":400,"detail":"Could
-        not find a resource for: a995c161-42c6-47a7-971b-12366d90bfc5"}'
+      string: '{"connectionId":"1234567890-42c6-47a7-971b-12366d90bfc5","name":"Connection updated name","sourceId":"1234567890-42c6-47a7-971b-12366d90bfc5","destinationId":"1234567890-42c6-47a7-971b-12366d90bfc5","workspaceId":"1234567890-42c6-47a7-971b-12366d90bfc5","status":"active","schedule":{"scheduleType":"manual"},"dataResidency":"auto","configurations":{"name":"Stream name"}}'
   recorded_at: Tue, 19 Sep 2023 13:46:59 GMT
 recorded_with: VCR 6.2.0
