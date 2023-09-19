@@ -26,5 +26,7 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
+    - name: Rubocop linter
+      run: bundle exec rubocop -P
     - name: Rspec tests
       run: bundle exec rspec spec
