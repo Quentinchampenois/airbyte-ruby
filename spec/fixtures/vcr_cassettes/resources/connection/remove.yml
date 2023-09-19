@@ -1,0 +1,39 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: http://localhost:8006/v1/connections/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Basic YWlyYnl0ZTpwYXNzd29yZA==
+      User-Agent:
+      - Faraday v2.7.11
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 405
+      message: Method Not Allowed
+    headers:
+      Server:
+      - nginx/1.25.2
+      Date:
+      - Tue, 19 Sep 2023 13:46:59 GMT
+      Content-Type:
+      - application/problem+json
+      Content-Length:
+      - '35'
+      Connection:
+      - keep-alive
+      Allow:
+      - HEAD,POST,GET
+    body:
+      encoding: UTF-8
+      string: '{"type":"about:blank","status":405}'
+  recorded_at: Tue, 19 Sep 2023 13:46:59 GMT
+recorded_with: VCR 6.2.0

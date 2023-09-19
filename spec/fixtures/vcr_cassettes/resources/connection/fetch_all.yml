@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:8006/v1/connections?includeDeleted=false&limit=20&offset=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Basic YWlyYnl0ZTpwYXNzd29yZA==
+      User-Agent:
+      - Faraday v2.7.11
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: Ok
+    headers:
+      Server:
+      - nginx/1.25.2
+      Date:
+      - Tue, 19 Sep 2023 13:46:59 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "{}"
+  recorded_at: Tue, 19 Sep 2023 13:46:59 GMT
+recorded_with: VCR 6.2.0
