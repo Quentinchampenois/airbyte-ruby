@@ -63,6 +63,20 @@ RSpec.describe AirbyteRuby::Resources::Connection do
         response = subject.fetch_all
         expect(response).to be_a(Array)
         expect(response.first).to be_a(Hash)
+        expect(response.first).to include("connectionId")
+        expect(response.first).to include("name")
+        expect(response.first).to include("sourceId")
+        expect(response.first).to include("destinationId")
+        expect(response.first).to include("workspaceId")
+        expect(response.first).to include("status")
+        expect(response.first).to include("schedule")
+        expect(response.first).to include("dataResidency")
+        expect(response.first).to include("nonBreakingSchemaUpdatesBehavior")
+        expect(response.first).to include("namespaceDefinition")
+        expect(response.first).to include("namespaceFormat")
+        expect(response.first).to include("configurations")
+
+
       end
     end
   end

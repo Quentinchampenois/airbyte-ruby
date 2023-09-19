@@ -23,15 +23,16 @@ http_interactions:
       Server:
       - nginx/1.25.2
       Date:
-      - Tue, 19 Sep 2023 13:46:59 GMT
+      - Tue, 19 Sep 2023 14:38:57 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2'
+      - '611'
       Connection:
       - keep-alive
     body:
-      encoding: UTF-8
-      string: "{}"
-  recorded_at: Tue, 19 Sep 2023 13:46:59 GMT
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJkYXRhIjpbeyJjb25uZWN0aW9uSWQiOiJiMzlmMWU1My1mMjk0LTRmYzMtYWI1Yi0xNTE2YTQzYTE0MjkiLCJuYW1lIjoiUEcgbG9jYWwgRG9ja2VyIOKGkiBQRyBsb2NhbCBEb2NrZXIiLCJzb3VyY2VJZCI6IjdlODE2MTBlLThkZWItNDM5OC04MDQ1LWQxNDExNGU4NWIzMSIsImRlc3RpbmF0aW9uSWQiOiIwZWI2Y2VmNy1iZTIyLTQ2MTctOGQ5OC0yZjhhOTNlMTIwN2MiLCJ3b3Jrc3BhY2VJZCI6IjlhZjE3ZTg1LTkyNWYtNGFmMy1iMDZlLTU1NTk3YWM3YWZmMSIsInN0YXR1cyI6ImFjdGl2ZSIsInNjaGVkdWxlIjp7InNjaGVkdWxlVHlwZSI6ImJhc2ljIiwiYmFzaWNUaW1pbmciOiJFdmVyeSAyNCBob3VycyJ9LCJkYXRhUmVzaWRlbmN5IjoiYXV0byIsIm5vbkJyZWFraW5nU2NoZW1hVXBkYXRlc0JlaGF2aW9yIjoiaWdub3JlIiwibmFtZXNwYWNlRGVmaW5pdGlvbiI6ImRlc3RpbmF0aW9uIiwibmFtZXNwYWNlRm9ybWF0IjoiJHtTT1VSQ0VfTkFNRVNQQUNFfSIsImNvbmZpZ3VyYXRpb25zIjp7InN0cmVhbXMiOlt7Im5hbWUiOiJjb250YWN0cyIsInN5bmNNb2RlIjoiaW5jcmVtZW50YWxfZGVkdXBlZF9oaXN0b3J5IiwicHJpbWFyeUtleSI6W1siaWQiXV19XX19XX0=
+  recorded_at: Tue, 19 Sep 2023 14:38:57 GMT
 recorded_with: VCR 6.2.0
