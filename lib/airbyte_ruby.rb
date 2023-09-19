@@ -4,6 +4,7 @@ require "faraday"
 require "ostruct"
 require_relative "airbyte_ruby/version"
 require_relative 'airbyte_ruby/requests'
+require_relative "airbyte_ruby/resources/base"
 require_relative "airbyte_ruby/resources/source"
 require_relative "airbyte_ruby/adapters/postgres"
 

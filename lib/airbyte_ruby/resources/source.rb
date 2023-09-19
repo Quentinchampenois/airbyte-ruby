@@ -2,9 +2,7 @@
 
 module AirbyteRuby
   module Resources
-    class Source
-      include AirbyteRuby::Requests
-
+    class Source < Base
       ENDPOINTS = OpenStruct.new(
         list: "/v1/sources?includeDeleted=false&limit=20&offset=0",
         create: "/v1/sources"

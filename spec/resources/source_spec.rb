@@ -18,6 +18,10 @@ RSpec.describe AirbyteRuby::Resources::Source do
     }
   end
 
+  it "is a instance of Base" do
+    expect(subject).to be_a AirbyteRuby::Resources::Base
+  end
+
   it "creates a new instance of Source" do
     expect(subject).to be_a(AirbyteRuby::Resources::Source)
   end
