@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:8006/v1/destinations?includeDeleted=false&limit=20&offset=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Basic YWlyYnl0ZTpwYXNzd29yZA==
+      User-Agent:
+      - Faraday v2.7.11
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: Ok
+    headers:
+      Server:
+      - nginx/1.25.2
+      Date:
+      - Tue, 19 Sep 2023 12:57:01 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1255'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"destinationId":"dbb5da19-01d8-4467-ab94-04de8a137ad6","name":"New
+        Airbyte destination","destinationType":"postgres","workspaceId":"9af17e85-925f-4af3-b06e-55597ac7aff1","configuration":{"host":"localhost","port":5432,"schema":"public","database":"airbyte","password":"**********","ssl_mode":{"mode":"prefer"},"username":"airbyte","tunnel_method":{"tunnel_method":"NO_TUNNEL"},"replication_method":{"method":"Xmin"}}},{"destinationId":"9834e4a2-5a8d-4963-abf8-baac0e3b9d35","name":"New
+        destination","destinationType":"postgres","workspaceId":"9af17e85-925f-4af3-b06e-55597ac7aff1","configuration":{"host":"localhost","port":5432,"schema":"public","database":"airbyte","password":"**********","ssl_mode":{"mode":"prefer"},"username":"airbyte","tunnel_method":{"tunnel_method":"NO_TUNNEL"},"replication_method":{"method":"Xmin"}}},{"destinationId":"fa992347-110c-47b3-9266-0d0b3de90dba","name":"Airbyte
+        destination","destinationType":"postgres","workspaceId":"9af17e85-925f-4af3-b06e-55597ac7aff1","configuration":{"host":"localhost","port":5432,"schema":"public","database":"airbyte","password":"**********","ssl_mode":{"mode":"prefer"},"username":"airbyte","tunnel_method":{"tunnel_method":"NO_TUNNEL"},"replication_method":{"method":"Xmin"}}}]}'
+  recorded_at: Tue, 19 Sep 2023 12:57:01 GMT
+recorded_with: VCR 6.2.0

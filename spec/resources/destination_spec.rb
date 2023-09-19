@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.describe AirbyteRuby::Resources::Source do
+RSpec.describe AirbyteRuby::Resources::Destination do
   subject { described_class.new(adapter, args) }
 
-  let(:name) { "Airbyte source" }
-  let(:id) { "9afc4250-e463-4439-80bd-c9b41b215839" }
-  let(:source_type) { "postgres" }
+  let(:name) { "Airbyte destination" }
+  let(:id) { "dbb5da19-01d8-4467-ab94-04de8a137ad6" }
   let(:workspace_id) { "9af17e85-925f-4af3-b06e-55597ac7aff1" }
   let(:adapter) { build(:postgres_adapter) }
 
@@ -13,7 +12,6 @@ RSpec.describe AirbyteRuby::Resources::Source do
     {
       name: name,
       id: id,
-      source_type: source_type,
       workspace_id: workspace_id
     }
   end
@@ -22,18 +20,18 @@ RSpec.describe AirbyteRuby::Resources::Source do
     expect(subject).to be_a AirbyteRuby::Resources::Base
   end
 
-  it "creates a new instance of Source" do
-    expect(subject).to be_a(AirbyteRuby::Resources::Source)
+  it "creates a new instance of Destination" do
+    expect(subject).to be_a(AirbyteRuby::Resources::Destination)
   end
 
   it "has a name attribute" do
     expect(subject).to respond_to(:name)
-    expect(subject.name).to eq("Airbyte source")
+    expect(subject.name).to eq("Airbyte destination")
   end
 
-  it "has a source_type attribute" do
-    expect(subject).to respond_to(:source_type)
-    expect(subject.source_type).to eq("postgres")
+  it "has a type attribute" do
+    expect(subject).to respond_to(:type)
+    expect(subject.type).to eq("postgres")
   end
 
   it "has a workspace_id attribute" do
@@ -60,11 +58,16 @@ RSpec.describe AirbyteRuby::Resources::Source do
       expect(subject).to respond_to(:fetch_all)
     end
 
-    it "returns a list of sources" do
-      VCR.use_cassette("resources/source/fetch_all") do
+    it "returns a list of destinations" do
+      VCR.use_cassette("resources/destination/fetch_all") do
         response = subject.fetch_all
         expect(response).to be_a(Array)
         expect(response.first).to be_a(Hash)
+        expect(response.first).to include("destinationId")
+        expect(response.first).to include("name")
+        expect(response.first).to include("destinationType")
+        expect(response.first).to include("workspaceId")
+        expect(response.first).to include("configuration")
       end
     end
   end
@@ -74,14 +77,14 @@ RSpec.describe AirbyteRuby::Resources::Source do
       expect(subject).to respond_to(:new)
     end
 
-    it "creates a new source" do
-      VCR.use_cassette("resources/source/new") do
+    it "creates a new destinations" do
+      VCR.use_cassette("resources/destination/new") do
         response = subject.new
 
         expect(response).to be_a(Hash)
-        expect(response).to include("sourceId")
+        expect(response).to include("destinationId")
         expect(response).to include("name")
-        expect(response).to include("sourceType")
+        expect(response).to include("destinationType")
         expect(response).to include("workspaceId")
         expect(response).to include("configuration")
         expect(response["configuration"]).to be_a(Hash)
@@ -94,14 +97,14 @@ RSpec.describe AirbyteRuby::Resources::Source do
       expect(subject).to respond_to(:fetch)
     end
 
-    it "fetches a source" do
-      VCR.use_cassette("resources/source/fetch") do
+    it "fetches a destination" do
+      VCR.use_cassette("resources/destination/fetch") do
         response = subject.fetch
 
         expect(response).to be_a(Hash)
-        expect(response).to include("sourceId")
+        expect(response).to include("destinationId")
         expect(response).to include("name")
-        expect(response).to include("sourceType")
+        expect(response).to include("destinationType")
         expect(response).to include("workspaceId")
         expect(response).to include("configuration")
         expect(response["configuration"]).to be_a(Hash)
@@ -110,15 +113,14 @@ RSpec.describe AirbyteRuby::Resources::Source do
   end
 
   describe "#update" do
-    let(:id) { "a995c161-42c6-47a7-971b-12366d90bfc5" }
     let(:name) { "Updated name" }
 
     it "responds to method update" do
       expect(subject).to respond_to(:update)
     end
 
-    it "updates a source" do
-      VCR.use_cassette("resources/source/update") do
+    it "updates a destination" do
+      VCR.use_cassette("resources/destination/update") do
         response = subject.update
 
         expect(response).to be_a(Hash)
@@ -133,8 +135,8 @@ RSpec.describe AirbyteRuby::Resources::Source do
       expect(subject).to respond_to(:remove)
     end
 
-    it "deletes a source" do
-      VCR.use_cassette("resources/source/remove") do
+    it "deletes a destination" do
+      VCR.use_cassette("resources/destination/remove") do
         response = subject.remove
 
         expect(response.status).to eq(204)

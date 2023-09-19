@@ -26,9 +26,9 @@ RSpec.describe AirbyteRuby::Adapters::Postgres do
     expect(subject).to be_a(AirbyteRuby::Adapters::Postgres)
   end
 
-  it "has a source_type attribute" do
-    expect(subject).to respond_to(:source_type)
-    expect(subject.source_type).to eq("postgres")
+  it "has a type attribute" do
+    expect(subject).to respond_to(:type)
+    expect(subject.type).to eq("postgres")
   end
 
   it "has a host attribute" do
@@ -86,7 +86,6 @@ RSpec.describe AirbyteRuby::Adapters::Postgres do
     it "returns a hash with the correct attributes" do
       configuration = subject.configuration
       expect(configuration).to be_a Hash
-      expect(configuration).to include(sourceType: "postgres")
       expect(configuration).to include(host: "localhost")
       expect(configuration).to include(port: 5432)
       expect(configuration).to include(database: "airbyte")

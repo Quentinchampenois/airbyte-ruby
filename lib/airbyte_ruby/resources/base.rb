@@ -30,7 +30,7 @@ module AirbyteRuby
       private
 
       def replace_variable_in_url(url, variable)
-        url.gsub(":#{variable}", @source_id)
+        url.gsub(":#{variable}", @id)
       end
     end
   end

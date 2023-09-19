@@ -2,17 +2,17 @@
 
 module AirbyteRuby
   module Resources
-    # Resource class for Airbyte Sources
-    class Source < Base
+    # Resource class for Airbyte Destinations
+    class Destination < Base
       ENDPOINTS = OpenStruct.new(
-        list: "/v1/sources?includeDeleted=false&limit=20&offset=0",
-        create: "/v1/sources",
-        get: "/v1/sources/:source_id",
-        update: "/v1/sources/:source_id",
-        delete: "/v1/sources/:source_id"
+        list: "/v1/destinations?includeDeleted=false&limit=20&offset=0",
+        create: "/v1/destinations",
+        get: "/v1/destinations/:destination_id",
+        update: "/v1/destinations/:destination_id",
+        delete: "/v1/destinations/:destination_id"
       )
 
-      attr_reader :id, :name, :source_type, :workspace_id, :connection_configuration
+      attr_reader :id, :name, :type, :workspace_id, :connection_configuration
 
       # TODO: Include Base module once ready
       # rubocop:disable Lint/MissingSuper
@@ -21,7 +21,7 @@ module AirbyteRuby
         @name = args[:name]
         @workspace_id = args[:workspace_id]
         @connection_configuration = adapter.configuration
-        @source_type = adapter.type
+        @type = adapter.type
       end
       # rubocop:enable Lint/MissingSuper
 
@@ -29,7 +29,7 @@ module AirbyteRuby
         {
           name: @name,
           workspaceId: @workspace_id,
-          configuration: @connection_configuration.merge(sourceType: @source_type)
+          configuration: @connection_configuration.merge(destinationType: @type)
         }.to_json
       end
 
@@ -42,17 +42,17 @@ module AirbyteRuby
       end
 
       def fetch
-        url = replace_variable_in_url(ENDPOINTS.get, "source_id")
+        url = replace_variable_in_url(ENDPOINTS.get, "destination_id")
         get(url)
       end
 
       def update
-        url = replace_variable_in_url(ENDPOINTS.update, "source_id")
+        url = replace_variable_in_url(ENDPOINTS.update, "destination_id")
         patch(url)
       end
 
       def remove
-        url = replace_variable_in_url(ENDPOINTS.delete, "source_id")
+        url = replace_variable_in_url(ENDPOINTS.delete, "destination_id")
         delete(url)
       end
     end
