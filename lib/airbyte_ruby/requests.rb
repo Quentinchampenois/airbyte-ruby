@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AirbyteRuby
   module Requests
     ENDPOINT = "http://localhost:8006/"
@@ -18,7 +20,7 @@ module AirbyteRuby
         faraday.set_basic_auth(BASIC_AUTH_CREDENTIALS.username, BASIC_AUTH_CREDENTIALS.password)
         faraday.headers["Content-Type"] = "application/json"
       end
-      res = conn.post(url, self.to_json)
+      res = conn.post(url, to_json)
       JSON.parse(res.body)
     end
 

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module AirbyteRuby
   module Resources
     class Base
       include AirbyteRuby::Requests
 
-      def to_json
+      def to_json(*_args)
         raise NotImplementedError
       end
 

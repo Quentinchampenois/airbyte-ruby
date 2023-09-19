@@ -20,7 +20,7 @@ module AirbyteRuby
         @source_type = adapter.source_type
       end
 
-      def to_json
+      def to_json(*_args)
         {
           name: @name,
           workspaceId: @workspace_id,
