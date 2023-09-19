@@ -55,6 +55,34 @@ RSpec.describe AirbyteRuby::Resources::Source do
     expect(subject.connection_configuration).to include(tunnel_method: { tunnel_method: "NO_TUNNEL" })
   end
 
+  describe "#to_json" do
+    it "responds to method to_json" do
+      expect(subject).to respond_to(:to_json)
+    end
+
+    it "returns a json object" do
+      expect(subject.to_json).to be_a(String)
+      expect(subject.to_json).to eq(
+        {
+          name: "Airbyte source",
+          workspaceId: "9af17e85-925f-4af3-b06e-55597ac7aff1",
+          configuration: {
+            host: "localhost",
+            port: 5432,
+            database: "airbyte",
+            schema: "public",
+            username: "airbyte",
+            password: "airbyte",
+            ssl_mode: { mode: "prefer" },
+            replication_method: { method: "Xmin" },
+            tunnel_method: { tunnel_method: "NO_TUNNEL" },
+            sourceType: "postgres"
+          }
+        }.to_json
+      )
+    end
+  end
+
   describe "#fetch_all" do
     it "responds to method fetch_all" do
       expect(subject).to respond_to(:fetch_all)
