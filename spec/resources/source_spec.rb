@@ -89,4 +89,24 @@ RSpec.describe AirbyteRuby::Resources::Source do
       end
     end
   end
+
+  describe "#fetch" do
+    it "responds to method fetch" do
+      expect(subject).to respond_to(:fetch)
+    end
+
+    it "fetches a source" do
+      VCR.use_cassette("resources/source/fetch") do
+        response = subject.fetch
+
+        expect(response).to be_a(Hash)
+        expect(response).to include("sourceId")
+        expect(response).to include("name")
+        expect(response).to include("sourceType")
+        expect(response).to include("workspaceId")
+        expect(response).to include("configuration")
+        expect(response["configuration"]).to be_a(Hash)
+      end
+    end
+  end
 end

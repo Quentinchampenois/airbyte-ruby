@@ -19,5 +19,13 @@ module AirbyteRuby
       res = conn.post(url, self.to_json)
       JSON.parse(res.body)
     end
+
+    def get(url)
+      conn = ::Faraday.new(url: ENDPOINT) do |faraday|
+        faraday.set_basic_auth(BASIC_AUTH_CREDENTIALS.username, BASIC_AUTH_CREDENTIALS.password)
+      end
+      res = conn.get(url)
+      JSON.parse(res.body)
+    end
   end
 end

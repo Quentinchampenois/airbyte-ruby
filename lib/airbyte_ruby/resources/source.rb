@@ -5,7 +5,8 @@ module AirbyteRuby
     class Source < Base
       ENDPOINTS = OpenStruct.new(
         list: "/v1/sources?includeDeleted=false&limit=20&offset=0",
-        create: "/v1/sources"
+        create: "/v1/sources",
+        get: "/v1/sources",
       )
 
       attr_reader :source_id, :name, :source_type, :workspace_id, :connection_configuration
@@ -32,6 +33,10 @@ module AirbyteRuby
 
       def new
         create(ENDPOINTS.create)
+      end
+
+      def fetch
+        get("#{ENDPOINTS.get}/#{@source_id}")
       end
     end
   end
