@@ -32,6 +32,15 @@ module AirbyteRuby
       JSON.parse(res.body)
     end
 
+    def patch(url)
+      conn = ::Faraday.new(url: ENDPOINT) do |faraday|
+        faraday.set_basic_auth(BASIC_AUTH_CREDENTIALS.username, BASIC_AUTH_CREDENTIALS.password)
+        faraday.headers["Content-Type"] = "application/json"
+      end
+      res = conn.patch(url, to_json)
+      JSON.parse(res.body)
+    end
+
     def delete(url)
       conn = ::Faraday.new(url: ENDPOINT) do |faraday|
         faraday.set_basic_auth(BASIC_AUTH_CREDENTIALS.username, BASIC_AUTH_CREDENTIALS.password)

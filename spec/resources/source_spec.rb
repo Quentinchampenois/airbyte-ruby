@@ -110,6 +110,25 @@ RSpec.describe AirbyteRuby::Resources::Source do
     end
   end
 
+  describe "#update" do
+    let(:source_id) { "a995c161-42c6-47a7-971b-12366d90bfc5" }
+    let(:name) { "Updated name" }
+
+    it "responds to method update" do
+      expect(subject).to respond_to(:update)
+    end
+
+    it "updates a source" do
+      VCR.use_cassette("resources/source/update") do
+        response = subject.update
+
+        expect(response).to be_a(Hash)
+        expect(response).to include("name")
+        expect(response["name"]).to eq("Updated name")
+      end
+    end
+  end
+
   describe "#remove" do
     it "responds to method remove" do
       expect(subject).to respond_to(:remove)

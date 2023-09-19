@@ -7,6 +7,7 @@ module AirbyteRuby
         list: "/v1/sources?includeDeleted=false&limit=20&offset=0",
         create: "/v1/sources",
         get: "/v1/sources/:source_id",
+        update: "/v1/sources/:source_id",
         delete: "/v1/sources/:source_id"
       )
 
@@ -39,6 +40,11 @@ module AirbyteRuby
       def fetch
         url = replace_variable_in_url(ENDPOINTS.get, "source_id")
         get(url)
+      end
+
+      def update
+        url = replace_variable_in_url(ENDPOINTS.update, "source_id")
+        patch(url)
       end
 
       def remove
