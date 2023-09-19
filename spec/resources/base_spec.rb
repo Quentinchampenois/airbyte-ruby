@@ -1,21 +1,33 @@
 RSpec.describe AirbyteRuby::Resources::Base do
-  subject { described_class }
+  subject { described_class.new }
 
   describe "#to_json" do
     it "raises an NotImplementedError" do
-      expect { subject.new.to_json }.to raise_error(NotImplementedError)
+      expect { subject.to_json }.to raise_error(NotImplementedError)
     end
   end
 
   describe "#get_all" do
     it "raises an NotImplementedError" do
-      expect { subject.new.get_all }.to raise_error(NotImplementedError)
+      expect { subject.get_all }.to raise_error(NotImplementedError)
     end
   end
 
   describe "#new" do
     it "raises an NotImplementedError" do
-      expect { subject.new.new }.to raise_error(NotImplementedError)
+      expect { subject.new }.to raise_error(NotImplementedError)
+    end
+  end
+
+  describe "#get" do
+    it "raises an NotImplementedError" do
+      expect { subject.fetch }.to raise_error(NotImplementedError)
+    end
+  end
+
+  describe "#remove" do
+    it "raises an NotImplementedError" do
+      expect { subject.remove }.to raise_error(NotImplementedError)
     end
   end
 end

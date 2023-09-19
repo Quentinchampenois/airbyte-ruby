@@ -109,4 +109,18 @@ RSpec.describe AirbyteRuby::Resources::Source do
       end
     end
   end
+
+  describe "#remove" do
+    it "responds to method remove" do
+      expect(subject).to respond_to(:remove)
+    end
+
+    it "deletes a source" do
+      VCR.use_cassette("resources/source/remove") do
+        response = subject.remove
+
+        expect(response.status).to eq(204)
+      end
+    end
+  end
 end
