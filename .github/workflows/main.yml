@@ -1,13 +1,20 @@
 name: Ruby
 
-on:
-  push:
-    branches:
-      - main
-
-  pull_request:
+on: [push, pull_request]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Linter
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+        bundler-cache: true
+    - name: Rubocop linter
+      run: bundle exec rubocop -P
   build:
     runs-on: ubuntu-latest
     name: Ruby ${{ matrix.ruby }}
@@ -26,7 +33,5 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
-    - name: Rubocop linter
-      run: bundle exec rubocop -P
     - name: Rspec tests
       run: bundle exec rspec spec
