@@ -91,8 +91,10 @@ RSpec.describe AirbyteRuby::Resources::Source do
     it "returns a list of sources" do
       VCR.use_cassette("resources/source/fetch_all") do
         response = subject.fetch_all
-        expect(response).to be_a(Array)
-        expect(response.first).to be_a(Hash)
+        expect(response).to be_a Faraday::Response
+        body = JSON.parse(response.body)["data"]
+        expect(body).to be_a(Array)
+        expect(body.first).to be_a(Hash)
       end
     end
   end
@@ -106,13 +108,14 @@ RSpec.describe AirbyteRuby::Resources::Source do
       VCR.use_cassette("resources/source/new") do
         response = subject.new
 
-        expect(response).to be_a(Hash)
-        expect(response).to include("sourceId")
-        expect(response).to include("name")
-        expect(response).to include("sourceType")
-        expect(response).to include("workspaceId")
-        expect(response).to include("configuration")
-        expect(response["configuration"]).to be_a(Hash)
+        expect(response).to be_a(Faraday::Response)
+        body = JSON.parse(response.body)
+        expect(body).to include("sourceId")
+        expect(body).to include("name")
+        expect(body).to include("sourceType")
+        expect(body).to include("workspaceId")
+        expect(body).to include("configuration")
+        expect(body["configuration"]).to be_a(Hash)
       end
     end
   end
@@ -126,13 +129,14 @@ RSpec.describe AirbyteRuby::Resources::Source do
       VCR.use_cassette("resources/source/fetch") do
         response = subject.fetch
 
-        expect(response).to be_a(Hash)
-        expect(response).to include("sourceId")
-        expect(response).to include("name")
-        expect(response).to include("sourceType")
-        expect(response).to include("workspaceId")
-        expect(response).to include("configuration")
-        expect(response["configuration"]).to be_a(Hash)
+        expect(response).to be_a(Faraday::Response)
+        body = JSON.parse(response.body)
+        expect(body).to include("sourceId")
+        expect(body).to include("name")
+        expect(body).to include("sourceType")
+        expect(body).to include("workspaceId")
+        expect(body).to include("configuration")
+        expect(body["configuration"]).to be_a(Hash)
       end
     end
   end
@@ -149,9 +153,11 @@ RSpec.describe AirbyteRuby::Resources::Source do
       VCR.use_cassette("resources/source/update") do
         response = subject.update
 
-        expect(response).to be_a(Hash)
-        expect(response).to include("name")
-        expect(response["name"]).to eq("Updated name")
+        expect(response).to be_a(Faraday::Response)
+        body = JSON.parse(response.body)
+        expect(body).to be_a(Hash)
+        expect(body).to include("name")
+        expect(body["name"]).to eq("Updated name")
       end
     end
   end
