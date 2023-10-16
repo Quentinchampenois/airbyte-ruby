@@ -8,6 +8,7 @@ on:
 
 env:
   CI: "true"
+  TAG: "0.1.0"
 
 jobs:
   lint:
@@ -54,17 +55,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: mathieudutour/github-tag-action@v6.1
-        name: Bump version and push tag
-        id: tag_version
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: ncipollo/release-action@v1
         name: Create a GitHub release
         with:
           generateReleaseNotes: true
-          tag: ${{ steps.tag_version.outputs.new_tag }}
-          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          tag: ${{ env.TAG }}
+          name: ${{ env.TAG }}
           body: ${{ steps.tag_version.outputs.changelog }}
   rubygems:
     name: Push to RubyGems
@@ -72,8 +68,24 @@ jobs:
     if: "github.ref == 'refs/heads/main'"
     runs-on: ubuntu-latest
     steps:
-      - name: Publish gem
-        uses: OpenSourcePolitics/decidim-publish-gem-action@master
+      - uses: ruby/setup-ruby@v1
         with:
-          rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          bundler-cache: true
+          ruby-version: 3.2
+      - name: Setup git and gh
+        run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
+        shell: bash
+      - name: Create release
+        run: gh release create ${{ env.TAG }} --generate-notes
+        shell: bash
+      - name: Publish to RubyGems
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+          gem build *.gemspec
+          gem push *.gem
+        env:
+          GEM_HOST_API_KEY: "${{ secrets.RUBYGEMS_API_KEY }}"
+        shell: bash
