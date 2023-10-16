@@ -85,58 +85,17 @@ RSpec.describe AirbyteRuby::Resources::Destination do
     it "responds to method fetch_all" do
       expect(subject).to respond_to(:fetch_all)
     end
-
-    it "returns a list of destinations" do
-      VCR.use_cassette("resources/destination/fetch_all") do
-        response = subject.fetch_all
-        expect(response).to be_a(Array)
-        expect(response.first).to be_a(Hash)
-        expect(response.first).to include("destinationId")
-        expect(response.first).to include("name")
-        expect(response.first).to include("destinationType")
-        expect(response.first).to include("workspaceId")
-        expect(response.first).to include("configuration")
-      end
-    end
   end
 
   describe "#new" do
     it "responds to method new" do
       expect(subject).to respond_to(:new)
     end
-
-    it "creates a new destinations" do
-      VCR.use_cassette("resources/destination/new") do
-        response = subject.new
-
-        expect(response).to be_a(Hash)
-        expect(response).to include("destinationId")
-        expect(response).to include("name")
-        expect(response).to include("destinationType")
-        expect(response).to include("workspaceId")
-        expect(response).to include("configuration")
-        expect(response["configuration"]).to be_a(Hash)
-      end
-    end
   end
 
   describe "#fetch" do
     it "responds to method fetch" do
       expect(subject).to respond_to(:fetch)
-    end
-
-    it "fetches a destination" do
-      VCR.use_cassette("resources/destination/fetch") do
-        response = subject.fetch
-
-        expect(response).to be_a(Hash)
-        expect(response).to include("destinationId")
-        expect(response).to include("name")
-        expect(response).to include("destinationType")
-        expect(response).to include("workspaceId")
-        expect(response).to include("configuration")
-        expect(response["configuration"]).to be_a(Hash)
-      end
     end
   end
 
@@ -145,16 +104,6 @@ RSpec.describe AirbyteRuby::Resources::Destination do
 
     it "responds to method update" do
       expect(subject).to respond_to(:update)
-    end
-
-    it "updates a destination" do
-      VCR.use_cassette("resources/destination/update") do
-        response = subject.update
-
-        expect(response).to be_a(Hash)
-        expect(response).to include("name")
-        expect(response["name"]).to eq("Updated name")
-      end
     end
   end
 

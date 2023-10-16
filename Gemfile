@@ -15,6 +15,8 @@ group :test do
   gem "byebug", "~> 11.0"
   gem "factory_bot", "~> 6.3"
   gem "rspec", "~> 3.0"
+  gem "simplecov", require: false
+  gem "simplecov-cobertura", require: false
   gem "vcr", "~> 6.0"
   gem "webmock", "~> 3.0"
 end

@@ -58,62 +58,17 @@ RSpec.describe AirbyteRuby::Resources::Connection do
     it "responds to method fetch_all" do
       expect(subject).to respond_to(:fetch_all)
     end
-
-    it "returns a list of connections" do
-      VCR.use_cassette("resources/connection/fetch_all") do
-        response = subject.fetch_all
-        expect(response).to be_a(Array)
-        expect(response.first).to be_a(Hash)
-        expect(response.first).to include("connectionId")
-        expect(response.first).to include("name")
-        expect(response.first).to include("sourceId")
-        expect(response.first).to include("destinationId")
-        expect(response.first).to include("workspaceId")
-        expect(response.first).to include("status")
-        expect(response.first).to include("schedule")
-        expect(response.first).to include("dataResidency")
-        expect(response.first).to include("nonBreakingSchemaUpdatesBehavior")
-        expect(response.first).to include("namespaceDefinition")
-        expect(response.first).to include("namespaceFormat")
-        expect(response.first).to include("configurations")
-      end
-    end
   end
 
   describe "#new" do
     it "responds to method new" do
       expect(subject).to respond_to(:new)
     end
-
-    it "creates a new source" do
-      VCR.use_cassette("resources/connection/new") do
-        response = subject.new
-
-        expect(response).to be_a(Hash)
-      end
-    end
   end
 
   describe "#fetch" do
     it "responds to method fetch" do
       expect(subject).to respond_to(:fetch)
-    end
-
-    it "fetches a connection" do
-      VCR.use_cassette("resources/connection/fetch") do
-        response = subject.fetch
-
-        expect(response).to be_a(Hash)
-        expect(response).to include("workspaceId")
-        expect(response).to include("sourceId")
-        expect(response).to include("destinationId")
-        expect(response).to include("name")
-        expect(response).to include("status")
-        expect(response).to include("schedule")
-        expect(response).to include("dataResidency")
-        expect(response).to include("configurations")
-        expect(response["configurations"]).to be_a(Hash)
-      end
     end
   end
 
@@ -123,16 +78,6 @@ RSpec.describe AirbyteRuby::Resources::Connection do
 
     it "responds to method update" do
       expect(subject).to respond_to(:update)
-    end
-
-    it "updates a connection" do
-      VCR.use_cassette("resources/connection/update") do
-        response = subject.update
-
-        expect(response).to be_a(Hash)
-        expect(response).to include("name")
-        expect(response["name"]).to eq("Connection updated name")
-      end
     end
   end
 

@@ -47,7 +47,6 @@ else
   puts "Something went wrong"
 end
 
-
 destination = AirbyteRuby::Resources::Destination.new(
   postgres_adapter,
   name: "Airbyte new source",
@@ -72,4 +71,3 @@ if res.success?
 else
   puts "Something went wrong"
 end
-

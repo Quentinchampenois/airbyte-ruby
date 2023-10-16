@@ -1,5 +1,7 @@
 # AirbyteRuby
 
+[![codecov](https://codecov.io/gh/Quentinchampenois/airbyte-ruby/graph/badge.svg?token=OCNNZRG0PR)](https://codecov.io/gh/Quentinchampenois/airbyte-ruby)
+
 TODO: Delete this and the text below, and describe your gem
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/airbyte_ruby`. To experiment with that code, run `bin/console` for an interactive prompt.

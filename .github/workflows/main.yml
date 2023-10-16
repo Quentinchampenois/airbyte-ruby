@@ -6,6 +6,9 @@ on:
       - main
   pull_request:
 
+env:
+  CI: "true"
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -38,3 +41,10 @@ jobs:
         bundler-cache: true
     - name: Rspec tests
       run: bundle exec rspec spec
+
+    - name: Upload coverage data to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        directory: ./coverage/
+        file: ./coverage/.resultset.json

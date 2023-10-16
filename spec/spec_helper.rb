@@ -1,7 +1,20 @@
 # frozen_string_literal: true
 
+if ENV["CI"]
+  require "simplecov"
+  require "simplecov-cobertura"
+  SimpleCov.start do
+    add_filter "/spec/"
+    add_filter "/.github/"
+    add_filter "/.git/"
+    add_filter "/bin/"
+    add_filter "/examples/"
+    add_filter "/sig/"
+  end
+  SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+end
+
 require "airbyte_ruby"
-require "byebug"
 require "vcr"
 require "webmock/rspec"
 require "factory_bot"
