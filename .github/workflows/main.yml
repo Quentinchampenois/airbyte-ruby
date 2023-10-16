@@ -8,6 +8,7 @@ on:
 
 env:
   CI: "true"
+  TAG: "0.1.0"
 
 jobs:
   lint:
@@ -54,17 +55,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: mathieudutour/github-tag-action@v6.1
-        name: Bump version and push tag
-        id: tag_version
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: ncipollo/release-action@v1
         name: Create a GitHub release
         with:
           generateReleaseNotes: true
-          tag: ${{ steps.tag_version.outputs.new_tag }}
-          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          tag: ${{ env.TAG }}
+          name: ${{ env.TAG }}
           body: ${{ steps.tag_version.outputs.changelog }}
   rubygems:
     name: Push to RubyGems
@@ -72,8 +68,13 @@ jobs:
     if: "github.ref == 'refs/heads/main'"
     runs-on: ubuntu-latest
     steps:
-      - name: Publish gem
-        uses: OpenSourcePolitics/decidim-publish-gem-action@master
-        with:
-          rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v3
+      - name: Release Gem
+        if: "github.ref == 'refs/heads/main'"
+        uses: discourse/publish-rubygems-action@v2-beta
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          RUBYGEMS_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
+          RELEASE_COMMAND: rake release
+          GIT_EMAIL: ci@quentinchampenois.com
+          GIT_NAME: Airbyteruby
