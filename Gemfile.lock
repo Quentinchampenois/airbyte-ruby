@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    airbyte_ruby (0.1.0)
+    airbyte-ruby (0.1.0)
       faraday (~> 2.7)
 
 GEM
@@ -94,7 +94,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  airbyte_ruby!
+  airbyte-ruby!
   byebug (~> 11.0)
   factory_bot (~> 6.3)
   faraday (~> 2.7)

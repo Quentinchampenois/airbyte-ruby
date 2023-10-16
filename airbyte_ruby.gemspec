@@ -3,7 +3,7 @@
 require_relative "lib/airbyte_ruby/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "airbyte_ruby"
+  spec.name = "airbyte-ruby"
   spec.version = AirbyteRuby::VERSION
   spec.authors = ["quentinchampenois"]
   spec.email = ["26109239+Quentinchampenois@users.noreply.github.com"]
