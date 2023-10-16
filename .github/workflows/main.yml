@@ -22,7 +22,7 @@ jobs:
         bundler-cache: true
     - name: Rubocop linter
       run: bundle exec rubocop -P
-  build:
+  specs:
     runs-on: ubuntu-latest
     name: Ruby ${{ matrix.ruby }}
     strategy:
@@ -41,10 +41,28 @@ jobs:
         bundler-cache: true
     - name: Rspec tests
       run: bundle exec rspec spec
-
     - name: Upload coverage data to Codecov
       uses: codecov/codecov-action@v3
       with:
         token: ${{secrets.CODECOV_TOKEN}}
         directory: ./coverage/
         file: ./coverage/.resultset.json
+  generate_release:
+    name: Generate release
+    needs: [lint, specs]
+    if: "github.ref == 'refs/heads/main'"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: mathieudutour/github-tag-action@v6.1
+        name: Bump version and push tag
+        id: tag_version
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ncipollo/release-action@v1
+        name: Create a GitHub release
+        with:
+          generateReleaseNotes: true
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
