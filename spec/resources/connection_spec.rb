@@ -58,17 +58,56 @@ RSpec.describe AirbyteRuby::Resources::Connection do
     it "responds to method fetch_all" do
       expect(subject).to respond_to(:fetch_all)
     end
+
+    it "fetches all connections" do
+      VCR.use_cassette("resources/connection/fetch_all") do
+        response = subject.fetch_all
+
+        expect(response.status).to eq(200)
+        body = JSON.parse(response.body)
+        expect(body).to be_a(Hash)
+        expect(body["data"]).to be_a(Array)
+      end
+    end
   end
 
   describe "#new" do
     it "responds to method new" do
       expect(subject).to respond_to(:new)
     end
+
+    it "creates a new connection" do
+      VCR.use_cassette("resources/connection/new") do
+        response = subject.new
+
+        expect(response.status).to eq(200)
+        body = JSON.parse(response.body)
+        expect(body).to be_a(Hash)
+        expect(body["connectionId"]).to be_a(String)
+        expect(body["name"]).to eq("Connection name")
+        expect(body["sourceId"]).to eq("source_uuid")
+        expect(body["destinationId"]).to eq("destination_uuid")
+      end
+    end
   end
 
   describe "#fetch" do
     it "responds to method fetch" do
       expect(subject).to respond_to(:fetch)
+    end
+
+    it "fetches a connection" do
+      VCR.use_cassette("resources/connection/fetch") do
+        response = subject.fetch
+
+        expect(response.status).to eq(200)
+        body = JSON.parse(response.body)
+        expect(body).to be_a(Hash)
+        expect(body["connectionId"]).to be_a(String)
+        expect(body["name"]).to eq("Connection example")
+        expect(body["sourceId"]).to eq("1234567890-42c6-47a7-971b-12366d90bfc5")
+        expect(body["destinationId"]).to eq("1234567890-42c6-47a7-971b-12366d90bfc5")
+      end
     end
   end
 
@@ -78,6 +117,20 @@ RSpec.describe AirbyteRuby::Resources::Connection do
 
     it "responds to method update" do
       expect(subject).to respond_to(:update)
+    end
+
+    it "updates a connection" do
+      VCR.use_cassette("resources/connection/update") do
+        response = subject.update
+
+        expect(response.status).to eq(200)
+        body = JSON.parse(response.body)
+        expect(body).to be_a(Hash)
+        expect(body["connectionId"]).to be_a(String)
+        expect(body["name"]).to eq("Connection updated name")
+        expect(body["sourceId"]).to eq("1234567890-42c6-47a7-971b-12366d90bfc5")
+        expect(body["destinationId"]).to eq("1234567890-42c6-47a7-971b-12366d90bfc5")
+      end
     end
   end
 

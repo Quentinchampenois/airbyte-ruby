@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: http://localhost:8006/v1/connections/123e4567-e89b-12d3-a456-426614174000
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.7.11
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - nginx/1.25.2
+      Date:
+      - Mon, 16 Oct 2023 14:04:33 GMT
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '701'
+      Connection:
+      - keep-alive
+      Www-Authenticate:
+      - Basic realm="Welcome to Airbyte"
+      Etag:
+      - '"64ff6994-2bd"'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        PGh0bWw+CiAgPGhlYWQ+CiAgICA8bWV0YSBjaGFyc2V0PSJ1dGYtOCIgLz4KICAgIDx0aXRsZT5BaXJieXRlIC0gQWNjZXNzIERlbmllZDwvdGl0bGU+CiAgPC9oZWFkPgogIDxib2R5PgogICAgPGgxPvCfkJkgTm9wZS48L2gxPgogICAgPGgyPjxjb2RlPkhUVFAgRXJyb3IgQ29kZTogNDAxPC9jb2RlPjwvaDI+CgogICAgPHA+CiAgICAgIFRoaXMgZGVwbG95bWVudCBvZiBBaXJieXRlIGlzIHByb3RlY3RlZCBieSBIVFRQIEJhc2ljIEF1dGhlbnRpY2F0aW9uLgogICAgICBQbGVhc2UgcmVmZXIgdG8gdGhlIDxhIGhyZWY9Imh0dHBzOi8vZG9jcy5haXJieXRlLmNvbSI+QWlyYnl0ZSBkb2NzPC9hPiB0byBsZWFybiBtb3JlIGFib3V0OgogICAgICA8dWw+CgkgICAgICA8bGk+PGEgaHJlZj0iaHR0cHM6Ly9kb2NzLmFpcmJ5dGUuY29tL3F1aWNrc3RhcnQvZGVwbG95LWFpcmJ5dGUiPnRoZSBkZWZhdWx0IHVzZXJuYW1lL3Bhc3N3b3JkPC9hPjwvbGk+CgkgICAgICA8bGk+PGEgaHJlZj0iaHR0cHM6Ly9kb2NzLmFpcmJ5dGUuY29tL29wZXJhdG9yLWd1aWRlcy9zZWN1cml0eSI+c2VjdXJpbmcgeW91ciBBaXJieXRlIGRlcGxveW1lbnQ8L2E+IGluY2x1ZGluZyB0dXJuaW5nIG9mZiBvciBjaGFuZ2luZyB0aGUgZGVmYXVsdCB1c2VybmFtZS9wYXNzd29yZC48L2xpPgogICAgICA8L3VsPgogICAgPC9wPgogIDwvYm9keT4KPC9odG1sPgo=
+  recorded_at: Mon, 16 Oct 2023 14:04:33 GMT
+recorded_with: VCR 6.2.0
