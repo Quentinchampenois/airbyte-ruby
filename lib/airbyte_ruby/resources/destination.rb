@@ -5,11 +5,11 @@ module AirbyteRuby
     # Resource class for Airbyte Destinations
     class Destination < Base
       ENDPOINTS = OpenStruct.new(
-        list: "/v1/destinations?includeDeleted=false&limit=20&offset=0",
-        create: "/v1/destinations",
-        get: "/v1/destinations/:destination_id",
-        update: "/v1/destinations/:destination_id",
-        delete: "/v1/destinations/:destination_id"
+        list: "/destinations?includeDeleted=false&limit=20&offset=0",
+        create: "/destinations",
+        get: "/destinations/:destination_id",
+        update: "/destinations/:destination_id",
+        delete: "/destinations/:destination_id"
       )
 
       attr_reader :id, :name, :type, :workspace_id, :connection_configuration

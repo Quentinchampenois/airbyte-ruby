@@ -1,48 +1,46 @@
 # frozen_string_literal: true
 
+require "byebug"
 module AirbyteRuby
   # Requests module for AirbyteRuby
   module Requests
-    ENDPOINT = "http://localhost:8006/"
-    BASIC_AUTH_CREDENTIALS = OpenStruct.new(username: "airbyte", password: "password")
-
     private
 
     def list(url)
-      conn = ::Faraday.new(url: ENDPOINT) do |faraday|
-        faraday.set_basic_auth(BASIC_AUTH_CREDENTIALS.username, BASIC_AUTH_CREDENTIALS.password)
-      end
-      conn.get(url)
+      url = "#{AirbyteRuby::Configuration.airbyte_api_version}#{url}"
+      base_conn.get(url)
     end
 
     def create(url)
-      conn = ::Faraday.new(url: ENDPOINT) do |faraday|
-        faraday.set_basic_auth(BASIC_AUTH_CREDENTIALS.username, BASIC_AUTH_CREDENTIALS.password)
-        faraday.headers["Content-Type"] = "application/json"
-      end
-      conn.post(url, to_json)
+      url = "#{AirbyteRuby::Configuration.airbyte_api_version}#{url}"
+      base_conn.post(url, to_json)
     end
 
     def get(url)
-      conn = ::Faraday.new(url: ENDPOINT) do |faraday|
-        faraday.set_basic_auth(BASIC_AUTH_CREDENTIALS.username, BASIC_AUTH_CREDENTIALS.password)
-      end
-      conn.get(url)
+      url = "#{AirbyteRuby::Configuration.airbyte_api_version}#{url}"
+      base_conn.get(url)
     end
 
     def patch(url)
-      conn = ::Faraday.new(url: ENDPOINT) do |faraday|
-        faraday.set_basic_auth(BASIC_AUTH_CREDENTIALS.username, BASIC_AUTH_CREDENTIALS.password)
-        faraday.headers["Content-Type"] = "application/json"
-      end
-      conn.patch(url, to_json)
+      url = "#{AirbyteRuby::Configuration.airbyte_api_version}#{url}"
+      base_conn.patch(url, to_json)
     end
 
     def delete(url)
-      conn = ::Faraday.new(url: ENDPOINT) do |faraday|
-        faraday.set_basic_auth(BASIC_AUTH_CREDENTIALS.username, BASIC_AUTH_CREDENTIALS.password)
+      url = "#{AirbyteRuby::Configuration.airbyte_api_version}#{url}"
+      base_conn.delete(url)
+    end
+
+    def base_conn
+      endpoint = AirbyteRuby::Configuration.endpoint
+      endpoint += "/" if endpoint[-1] != "/"
+      ::Faraday.new(url: endpoint) do |faraday|
+        if AirbyteRuby::Configuration.basic_auth
+          faraday.set_basic_auth(AirbyteRuby::Configuration.airbyte_username,
+                                 AirbyteRuby::Configuration.airbyte_password)
+        end
+        faraday.headers["Content-Type"] = "application/json"
       end
-      conn.delete(url)
     end
   end
 end

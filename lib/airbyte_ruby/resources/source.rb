@@ -5,11 +5,11 @@ module AirbyteRuby
     # Resource class for Airbyte Sources
     class Source < Base
       ENDPOINTS = OpenStruct.new(
-        list: "/v1/sources?includeDeleted=false&limit=20&offset=0",
-        create: "/v1/sources",
-        get: "/v1/sources/:source_id",
-        update: "/v1/sources/:source_id",
-        delete: "/v1/sources/:source_id"
+        list: "/sources?includeDeleted=false&limit=20&offset=0",
+        create: "/sources",
+        get: "/sources/:source_id",
+        update: "/sources/:source_id",
+        delete: "/sources/:source_id"
       )
 
       attr_reader :id, :name, :source_type, :workspace_id, :connection_configuration

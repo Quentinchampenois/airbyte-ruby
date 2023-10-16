@@ -4,6 +4,13 @@
 require "bundler/setup"
 require "airbyte_ruby"
 
+AirbyteRuby::Configuration.tap do |c|
+  c.endpoint = ENV.fetch("AIRBYTE_ENDPOINT", "http://localhost:8006/")
+  c.basic_auth = true
+  c.airbyte_username = ENV.fetch("AIRBYTE_USERNAME", "airbyte")
+  c.airbyte_password = ENV.fetch("AIRBYTE_PASSWORD", "password")
+end
+
 db_host = ENV["DB_HOST"] || "localhost"
 db_port = ENV["DB_PORT"]&.to_i || 5432
 db_name = ENV["DB_NAME"] || "postgres"
@@ -44,7 +51,7 @@ if res.success?
   See more on http://localhost:8000/workspaces/#{workspace_uuid}/source/#{params["sourceId"]}
 "
 else
-  puts "Something went wrong"
+  puts "Something went wrong : HTTP Status: #{res.status}"
 end
 
 destination = AirbyteRuby::Resources::Destination.new(
@@ -69,5 +76,5 @@ if res.success?
   See more on http://localhost:8000/workspaces/#{workspace_uuid}/destination/#{params["destinationId"]}
 "
 else
-  puts "Something went wrong"
+  puts "Something went wrong : HTTP Status: #{res.status}"
 end
