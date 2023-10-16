@@ -85,17 +85,52 @@ RSpec.describe AirbyteRuby::Resources::Destination do
     it "responds to method fetch_all" do
       expect(subject).to respond_to(:fetch_all)
     end
+
+    it "returns a list of destinations" do
+      VCR.use_cassette("resources/destination/fetch_all") do
+        response = subject.fetch_all
+
+        expect(response.status).to eq(200)
+        body = JSON.parse(response.body)
+        expect(body["data"]).to be_a(Array)
+        expect(body["data"].first).to be_a(Hash)
+        expect(body["data"].first["name"]).to eq("New Airbyte destination")
+        expect(body["data"].first["destinationId"]).to eq("dbb5da19-01d8-4467-ab94-04de8a137ad6")
+      end
+    end
   end
 
   describe "#new" do
     it "responds to method new" do
       expect(subject).to respond_to(:new)
     end
+
+    it "creates a new destination" do
+      VCR.use_cassette("resources/destination/new") do
+        response = subject.new
+
+        expect(response.status).to eq(200)
+        body = JSON.parse(response.body)
+        expect(body["name"]).to eq("Airbyte destination")
+        expect(body["destinationId"]).to eq("fa992347-110c-47b3-9266-0d0b3de90dba")
+      end
+    end
   end
 
   describe "#fetch" do
     it "responds to method fetch" do
       expect(subject).to respond_to(:fetch)
+    end
+
+    it "fetches a destination" do
+      VCR.use_cassette("resources/destination/fetch") do
+        response = subject.fetch
+
+        expect(response.status).to eq(200)
+        body = JSON.parse(response.body)
+        expect(body["name"]).to eq("New Airbyte destination")
+        expect(body["destinationId"]).to eq("dbb5da19-01d8-4467-ab94-04de8a137ad6")
+      end
     end
   end
 
@@ -104,6 +139,17 @@ RSpec.describe AirbyteRuby::Resources::Destination do
 
     it "responds to method update" do
       expect(subject).to respond_to(:update)
+    end
+
+    it "updates a destination" do
+      VCR.use_cassette("resources/destination/update") do
+        response = subject.update
+
+        expect(response.status).to eq(200)
+        body = JSON.parse(response.body)
+        expect(body["name"]).to eq("Updated name")
+        expect(body["destinationId"]).to eq("dbb5da19-01d8-4467-ab94-04de8a137ad6")
+      end
     end
   end
 
