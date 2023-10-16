@@ -66,3 +66,14 @@ jobs:
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
+  rubygems:
+    name: Push to RubyGems
+    needs: [ lint, specs, generate_release ]
+    if: "github.ref == 'refs/heads/main'"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish gem
+        uses: OpenSourcePolitics/decidim-publish-gem-action@master
+        with:
+          rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
