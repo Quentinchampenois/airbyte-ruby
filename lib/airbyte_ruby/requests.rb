@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "byebug"
 module AirbyteRuby
   # Requests module for AirbyteRuby
   module Requests
